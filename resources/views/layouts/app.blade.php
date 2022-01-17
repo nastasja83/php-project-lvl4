@@ -81,13 +81,14 @@
             </div>
         </nav>
         <main class="container py-4">
-            <div class="container">
-                <div class="row">
-                    <div class="col">
-                        @include('flash::message')
-                    </div>
+            @if ($errors->any())
+                <div class="alert alert-danger" role="alert">
+                    @foreach ($errors->all() as $error)
+                        {{ $error }}
+                    @endforeach
                 </div>
-            </div>
+            @endif
+            @include('flash::message')
             @yield('content')
         </main>
     </div>
