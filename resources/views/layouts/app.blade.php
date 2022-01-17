@@ -36,7 +36,7 @@
                             <a class="nav-link " href="">{{ __('tasks.Tasks') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link " href="">{{ __('taskStatuses.Statuses') }}</a>
+                            <a class="nav-link " href="{{ route('task_statuses.index') }}">{{ __('taskStatuses.Statuses') }}</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link " href="">{{ __('labels.Labels') }}</a>
@@ -54,7 +54,7 @@
 
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('register.Register') }}</a>
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('register.Sign up') }}</a>
                                 </li>
                             @endif
                         @else
