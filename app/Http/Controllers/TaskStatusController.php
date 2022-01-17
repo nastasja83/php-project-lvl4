@@ -19,7 +19,7 @@ class TaskStatusController extends Controller
      */
     public function index()
     {
-        $taskStatuses = TaskStatus::orderBy('id', 'ask')->paginate();
+        $taskStatuses = TaskStatus::orderBy('id', 'asc')->paginate();
         return view('task_statuses.index', compact('taskStatuses'));
     }
 
@@ -76,7 +76,7 @@ class TaskStatusController extends Controller
     public function update(Request $request, TaskStatus $taskStatus)
     {
         $data = $this->validate($request, [
-            'name' => 'required|unique:task_statuses, name' . $taskStatus->id
+            'name' => 'required|unique:task_statuses,name,' . $taskStatus->id
         ], $messages = [
             'unique' => __('validation.The status name has already been taken'),
         ]);
