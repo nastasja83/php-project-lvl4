@@ -35,7 +35,7 @@
         </table>
     <nav>
         <ul class="pagination">
-        <li>{{ $taskStatuses->onEachSide(5)->links() }}</li>
+        <li>{{ $taskStatuses->onEachSide(3)->links() }}</li>
         </ul>
     </nav>
 </div>
