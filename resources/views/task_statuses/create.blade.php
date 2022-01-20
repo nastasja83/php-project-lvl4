@@ -2,18 +2,18 @@
 
 @section('content')
 <h1 class="mb-5">{{ __('taskStatuses.Create status') }}</h1>
-{{Form::open(['url' => route('task_statuses.store')])}}
+{{Form::open(['url' => route('task_statuses.store'), 'class' => 'w-50'])}}
     <div class="form-group mb-3">
         {{Form::label('name', __('taskStatuses.Status name'))}}
-            {{Form::text('name', '', ['class' => 'form-control'])}}
+        {{Form::text('name', '', ['class' => 'form-control'])}}
     </div>
+    <div class="invalid-feedback d-block">
         @if ($errors->any())
-            <div class="invalid-feedback d-block">
-                @foreach ($errors->all() as $error)
-                    {{ $error }}
-                @endforeach
-            </div>
+            @foreach ($errors->all() as $error)
+                {{ $error }}
+            @endforeach
         @endif
+    </div>
         {{Form::submit(__('taskStatuses.Create'), ['class' => 'btn btn-primary mt-3'])}}
 {{ Form::close() }}
 @endsection('content')

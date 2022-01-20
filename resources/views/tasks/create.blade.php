@@ -6,6 +6,11 @@
         <div class="form-group mb-3">
            {{Form::label('name', __('tasks.Task name'))}}
            {{Form::text('name', $task->name, ['class' => 'form-control'])}}
+           @if ($errors->has('name'))
+                @error('name')
+                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                @enderror
+            @endif
         </div>
         <div class="form-group mb-3">
            {{Form::label('description', __('tasks.Description'))}}
@@ -14,6 +19,11 @@
         <div class="form-group mb-3">
            {{Form::label('status_id', __('taskStatuses.Status'))}}
            {{Form::select('status_id', $taskStatuses, null, ['placeholder' => '----------', 'class' => 'form-control'])}}
+           @if ($errors->has('name'))
+                @error('name')
+                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                @enderror
+            @endif
         </div>
         <div class="form-group mb-3">
            {{Form::label('assigned_to_id', __('tasks.Executor'))}}
@@ -22,13 +32,6 @@
            {{Form::label('label_id', __('labels.Labels'))}}
            {{Form::select('label_id', $labels, $task->labels, ['placeholder' => '', 'multiple' => 'multiple', 'name' => 'labels[]', 'class' => 'form-control'])}}
         </div>
-           @if ($errors->any())
-            <div class="invalid-feedback d-block">
-                @foreach ($errors->all() as $error)
-                    {{ $error }}
-                @endforeach
-            </div>
-            @endif
-    {{Form::submit(__('tasks.Update'), ['class' => 'btn btn-primary mt-3'])}}
+    {{Form::submit(__('tasks.Create'), ['class' => 'btn btn-primary mt-3'])}}
     {{Form::close()}}
 @endsection('content')
