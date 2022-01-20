@@ -36,9 +36,9 @@ class TaskController extends Controller
         $task = new Task();
         $taskStatuses = TaskStatus::pluck('name', 'id')->all();
         $labels = Label::pluck('name', 'id')->all();
-        $executers = User::pluck('name', 'id')->all();
+        $executors = User::pluck('name', 'id')->all();
 
-        return view('tasks.create', compact('task', 'statuses', 'labels', 'executers'));
+        return view('tasks.create', compact('task', 'taskStatuses', 'labels', 'executors'));
     }
 
     /**
@@ -92,9 +92,9 @@ class TaskController extends Controller
     {
         $taskStatuses = TaskStatus::pluck('name', 'id')->all();
         $labels = Label::pluck('name', 'id')->all();
-        $executers = User::pluck('name', 'id')->all();
+        $executors = User::pluck('name', 'id')->all();
 
-        return view('tasks.edit', compact('task', 'taskStatuses', 'executers', 'labels'));
+        return view('tasks.edit', compact('task', 'taskStatuses', 'executors', 'labels'));
     }
 
     /**
