@@ -19,7 +19,8 @@ class CreateTasksTable extends Migration
             $table->text('description')->nullable();
             $table->foreignId('status_id')->constrained('task_statuses');
             $table->foreignId('created_by_id')->constrained('users');
-            $table->foreignId('assigned_to_id')->constrained('users');
+            $table->bigInteger('assigned_to_id')->nullable();
+            $table->foreign('assigned_to_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
