@@ -33,6 +33,6 @@
            {{Form::label('label_id', __('labels.Labels'))}}
            {{Form::select('label_id', $labels, $task->labels, ['placeholder' => '', 'multiple' => 'multiple', 'name' => 'labels[]', 'class' => 'form-control'])}}
         </div>
-    {{Form::submit(__('task.Update'), ['class' => 'btn btn-primary mt-3'])}}
+    {{Form::submit(__('tasks.Update'), ['class' => 'btn btn-primary mt-3'])}}
     {{Form::close()}}
 @endsection('content')
