@@ -33,13 +33,13 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link " href="">{{ __('tasks.Tasks') }}</a>
+                            <a class="nav-link " href="{{ route('tasks.index') }}">{{ __('tasks.Tasks') }}</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link " href="{{ route('task_statuses.index') }}">{{ __('taskStatuses.Statuses') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link " href="">{{ __('labels.Labels') }}</a>
+                            <a class="nav-link " href="{{ route('labels.index') }}">{{ __('labels.Labels') }}</a>
                         </li>
                     </ul>
                     <!-- Right Side Of Navbar -->
@@ -81,13 +81,6 @@
             </div>
         </nav>
         <main class="container py-4">
-            @if ($errors->any())
-                <div class="alert alert-danger" role="alert">
-                    @foreach ($errors->all() as $error)
-                        {{ $error }}
-                    @endforeach
-                </div>
-            @endif
             @include('flash::message')
             @yield('content')
         </main>
