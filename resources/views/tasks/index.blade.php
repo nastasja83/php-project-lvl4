@@ -4,6 +4,24 @@
 <div class="container">
     <h1 class="mb-5">{{ __('tasks.Tasks') }}</h1>
     <div class="d-flex mb-3">
+        <div>
+            {{Form::open(['route' => 'tasks.index', 'method' => 'GET'])}}
+            <div class="row g-1">
+                <div class="col">
+                    {{Form::select('filter[status_id]', $taskStatuses, $filter['status_id'] ?? null, ['placeholder' => __('taskStatuses.Status'), 'class' => 'form-select me-2'])}}
+                </div>
+                <div class="col">
+                    {{Form::select('filter[created_by_id]', $taskStatuses, $filter['created_by_id'] ?? null, ['placeholder' => __('tasks.Author'), 'class' => 'form-select me-2'])}}
+                </div>
+                <div class="col">
+                    {{Form::select('filter[assigned_to_id]', $taskStatuses, $filter['assigned_to_id'] ?? null, ['placeholder' => __('tasks.Executor'), 'class' => 'form-select me-2'])}}
+                </div>
+                <div class="col">
+                    {{Form::submit(__('tasks.Apply'), ['class' => 'btn btn-outline-primary me-2'])}}
+                </div>
+                {{Form::close()}}
+            </div>
+        </div>
         <div class="ms-auto">
             @if(Auth::check())
             <a href="{{ route('tasks.create') }}" class="btn btn-primary ml-auto">{{ __('tasks.Create task') }}</a>

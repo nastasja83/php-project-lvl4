@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\TaskStatus;
 use App\Models\User;
 use App\Models\Label;
+use Spatie\QueryBuilder\AllowedFilter;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class TaskController extends Controller
 {
@@ -20,9 +22,23 @@ class TaskController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $tasks = Task::orderBy('id', 'desc')->paginate();
+        $taskStatuses = TaskStatus::pluck('name', 'id')->all();
+        $users = User::pluck('name', 'id')->all();
+
+        $tasks = QueryBuilder::for(Task::class)
+        ->allowedFilters([
+            AllowedFilter::exact('status_id'),
+            AllowedFilter::exact('created_by_id'),
+            AllowedFilter::exact('assigned_to_id')
+        ])
+        ->orderBy('id', 'desc')
+        ->paginate();
+
+        $filter = $request->filter ?? null;
+        return view('tasks.index', compact('tasks', 'taskStatuses', 'users', 'filter'));
+
         return view('tasks.index', compact('tasks'));
     }
 
