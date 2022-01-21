@@ -19,8 +19,8 @@
         <div class="form-group mb-3">
            {{Form::label('status_id', __('taskStatuses.Status'))}}
            {{Form::select('status_id', $taskStatuses, null, ['placeholder' => '----------', 'class' => 'form-control'])}}
-           @if ($errors->has('name'))
-                @error('name')
+           @if ($errors->has('status_id'))
+                @error('status_id')
                     <div class="invalid-feedback d-block">{{ $message }}</div>
                 @enderror
             @endif
