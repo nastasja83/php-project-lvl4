@@ -18,7 +18,7 @@ class LabelController extends Controller
      */
     public function index()
     {
-        $labels = Label::orderBy('id', 'asc')->paginate();
+        $labels = Label::orderBy('id', 'desc')->paginate();
         return view('labels.index', compact('labels'));
     }
 
@@ -30,7 +30,7 @@ class LabelController extends Controller
     public function create()
     {
         $label = new Label();
-        return view('labels.create', compact('labels'));
+        return view('labels.create', compact('label'));
     }
 
     /**

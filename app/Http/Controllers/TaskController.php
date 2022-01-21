@@ -22,7 +22,7 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $tasks = Task::orderBy('id', 'asc')->paginate();
+        $tasks = Task::orderBy('id', 'desc')->paginate();
         return view('tasks.index', compact('tasks'));
     }
 
@@ -49,10 +49,10 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $this->validate($request, [
+        $data = $request->validate([
             'name' => 'required|unique:tasks',
-            'description' => 'nullable|string',
             'status_id' => 'required',
+            'description' => 'nullable|string',
             'assigned_to_id' => 'nullable|integer',
             'labels' => 'nullable|array'
         ], $messages = [
@@ -70,7 +70,6 @@ class TaskController extends Controller
         flash(__('tasks.Task has been added successfully'))->success();
         return redirect()->route('tasks.index');
     }
-
     /**
      * Display the specified resource.
      *
