@@ -45,7 +45,7 @@ class LabelControllerTest extends TestCase
         ->only(['name', 'description']);
 
         $response = $this->actingAs($this->user)
-            ->post(route('labels.store'), $data);
+            ->post(route('labels.store', $data));
         $response->assertSessionHasNoErrors();
         $response->assertRedirect(route('labels.index'));
         $this->get(route('labels.index'))->assertSee($data['name']);
@@ -72,10 +72,10 @@ class LabelControllerTest extends TestCase
     {
         $label = Label::factory()->create();
         $response = $this->actingAs($this->user)
-            ->delete(route('label.destroy', ['label' => $label]));
+            ->delete(route('labels.destroy', ['label' => $label]));
         $response->assertSessionHasNoErrors();
-        $response->assertRedirect(route('label.index'));
+        $response->assertRedirect(route('labels.index'));
 
-        $this->assertDatabaseMissing('label', ['id' => $label->id]);
+        $this->assertDatabaseMissing('labels', ['id' => $label->id]);
     }
 }
