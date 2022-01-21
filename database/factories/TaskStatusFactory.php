@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 class TaskStatusFactory extends Factory
 {
-    protected $model = TaskStatus::class;
     /**
      * Define the model's default state.
      *
