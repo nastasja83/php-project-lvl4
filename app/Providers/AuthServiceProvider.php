@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Policies\LabelPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -14,7 +15,8 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         TaskStatus::class => TaskStatusPolicy::class,
-        Task::class => TaskPolicy::class
+        Task::class => TaskPolicy::class,
+        Label::class => LabelPolicy::class
     ];
 
     /**
