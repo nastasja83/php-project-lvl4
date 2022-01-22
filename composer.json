@@ -54,8 +54,7 @@
             "@php artisan key:generate --ansi"
         ],
         "phpcs": "phpcs",
-        "phpcbf": "phpcbf",
-        "test": "phpunit tests"
+        "phpcbf": "phpcbf"
     },
     "extra": {
         "laravel": {
