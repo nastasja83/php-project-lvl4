@@ -38,8 +38,6 @@ class TaskController extends Controller
 
         $filter = $request->filter ?? null;
         return view('tasks.index', compact('tasks', 'taskStatuses', 'users', 'filter'));
-
-        return view('tasks.index', compact('tasks'));
     }
 
     /**
