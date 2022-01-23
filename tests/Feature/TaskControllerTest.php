@@ -61,7 +61,7 @@ class TaskControllerTest extends TestCase
         $response->assertRedirect(route('tasks.index'));
 
         $this->get(route('tasks.index'))->assertSee($task['name']);
-        $this->assertDatabaseHas('tasks', array_merge($task, ['created_by_id' => $this->user->id]));
+        $this->assertDatabaseHas('tasks', $task);
     }
 
     public function testUpdate()
@@ -84,6 +84,7 @@ class TaskControllerTest extends TestCase
     {
         $task = Task::factory()->create();
         $user = $task->creator;
+        var_export($task->creator);
 
         $response = $this->actingAs($user)
             ->delete(route('tasks.destroy', ['task' => $task]));
