@@ -10,6 +10,7 @@ use App\Models\User;
 
 class TaskFactory extends Factory
 {
+    protected $model = Task::class;
     /**
      * Define the model's default state.
      *
