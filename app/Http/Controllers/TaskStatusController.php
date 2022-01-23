@@ -80,7 +80,6 @@ class TaskStatusController extends Controller
         ], $messages = [
             'unique' => __('validation.The status name has already been taken'),
         ]);
-        $taskStatus = new TaskStatus();
         $taskStatus->fill($data);
         $taskStatus->save();
         flash(__('taskStatuses.Status has been updated successfully'))->success();
