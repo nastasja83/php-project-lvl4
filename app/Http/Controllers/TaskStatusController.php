@@ -42,13 +42,13 @@ class TaskStatusController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $this->validate($request, [
+        $taskStatusInputData = $this->validate($request, [
             'name' => 'required|unique:task_statuses'
         ], $messages = [
             'unique' => __('validation.The status name has already been taken'),
         ]);
         $taskStatus = new TaskStatus();
-        $taskStatus->fill($data);
+        $taskStatus->fill($taskStatusInputData);
         $taskStatus->save();
         flash(__('taskStatuses.Status has been added successfully'))->success();
         return redirect()
@@ -75,12 +75,12 @@ class TaskStatusController extends Controller
      */
     public function update(Request $request, TaskStatus $taskStatus)
     {
-        $data = $this->validate($request, [
+        $taskStatusInputData = $this->validate($request, [
             'name' => 'required|unique:task_statuses,name,' . $taskStatus->id
         ], $messages = [
             'unique' => __('validation.The status name has already been taken'),
         ]);
-        $taskStatus->fill($data);
+        $taskStatus->fill($taskStatusInputData);
         $taskStatus->save();
         flash(__('taskStatuses.Status has been updated successfully'))->success();
         return redirect()

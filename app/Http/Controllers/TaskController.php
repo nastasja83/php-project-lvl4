@@ -63,7 +63,7 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->validate([
+        $taskInputData = $request->validate([
             'name' => 'required|unique:tasks',
             'status_id' => 'required',
             'description' => 'nullable|string',
@@ -75,7 +75,7 @@ class TaskController extends Controller
 
         $user = Auth::user();
         $task = $user->tasks()->make();
-        $task->fill($data);
+        $task->fill($taskInputData);
         $task->save();
 
         $labels = collect($request->input('labels'))->filter(fn($label) => isset($label));
@@ -119,7 +119,7 @@ class TaskController extends Controller
      */
     public function update(Request $request, Task $task)
     {
-        $data = $this->validate($request, [
+        $taskInputData = $this->validate($request, [
             'name' => 'required|unique:tasks,name,' . $task->id,
             'description' => 'nullable|string',
             'status_id' => 'required',
@@ -129,7 +129,7 @@ class TaskController extends Controller
             'unique' => __('validation.The task name has already been taken'),
         ]);
 
-        $task->fill($data);
+        $task->fill($taskInputData);
         $task->save();
 
         $labels = collect($request->input('labels'))->filter(fn($label) => isset($label));

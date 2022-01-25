@@ -41,7 +41,7 @@ class LabelController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $this->validate($request, [
+        $labelInputData = $this->validate($request, [
             'name' => 'required|unique:labels',
             'description' => 'nullable|string'
         ], $messages = [
@@ -49,7 +49,7 @@ class LabelController extends Controller
         ]);
 
         $label = new Label();
-        $label->fill($data);
+        $label->fill($labelInputData);
         $label->save();
 
         flash(__('labels.Label has been added successfully'))->success();
@@ -77,14 +77,14 @@ class LabelController extends Controller
      */
     public function update(Request $request, Label $label)
     {
-        $data = $this->validate($request, [
+        $labelInputData = $this->validate($request, [
             'name' => 'required|unique:labels,name,' . $label->id,
             'description' => 'nullable|string'
         ], $messages = [
             'unique' => __('validation.The label name has already been taken'),
         ]);
 
-        $label->fill($data);
+        $label->fill($labelInputData);
         $label->save();
 
         flash(__('labels.Label has been updated successfully'))->success();
