@@ -2,8 +2,6 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\User;
 use App\Models\Task;
@@ -11,8 +9,6 @@ use App\Models\TaskStatus;
 
 class TaskControllerTest extends TestCase
 {
-    use RefreshDatabase;
-
     private User $user;
 
     protected function setUp(): void
@@ -22,39 +18,60 @@ class TaskControllerTest extends TestCase
         TaskStatus::factory()->create();
     }
 
-    public function testIndex()
+    /**
+     * Test of tasks index.
+     *
+     * @return void
+     */
+    public function testIndex(): void
     {
         $response = $this->get(route('tasks.index'));
         $response->assertOk();
     }
 
-    public function testCreate()
+    /**
+     * Test of tasks create.
+     *
+     * @return void
+     */
+    public function testCreate(): void
     {
         $response = $this->actingAs($this->user)
             ->get(route('tasks.create'));
         $response->assertOk();
     }
 
-    public function testShow()
+    /**
+     * Test of tasks show.
+     *
+     * @return void
+     */
+    public function testShow(): void
     {
         $task = Task::factory()->create();
         $response = $this->get(route('tasks.show', ['task' => $task]));
         $response->assertOk();
     }
 
-    public function testEdit()
+        /**
+     * Test of tasks edit.
+     *
+     * @return void
+     */
+    public function testEdit(): void
     {
         $task = Task::factory()->create();
         $response = $this->actingAs($this->user)
             ->get(route('tasks.edit', ['task' => $task]));
         $response->assertOk();
     }
+
     /**
      * Test of tasks store.
      *
      * @return void
      */
-    public function testStore()
+    public function testStore(): void
     {
         $task = Task::factory()
             ->make()
@@ -68,12 +85,13 @@ class TaskControllerTest extends TestCase
         $this->get(route('tasks.index'))->assertSee($task['name']);
         $this->assertDatabaseHas('tasks', $task);
     }
+
     /**
      * Test of tasks update.
      *
      * @return void
      */
-    public function testUpdate()
+    public function testUpdate(): void
     {
         $currentTask = Task::factory()->create();
         $updatedTask = Task::factory()
@@ -88,12 +106,13 @@ class TaskControllerTest extends TestCase
         $response = $this->get(route('tasks.index'))->assertSee($updatedTask['name']);
         $this->assertDatabaseHas('tasks', $updatedTask);
     }
+
     /**
      * Test of tasks delete.
      *
      * @return void
      */
-    public function testDestroy()
+    public function testDestroy(): void
     {
         $task = Task::factory()->create(['created_by_id' => $this->user->id]);
 

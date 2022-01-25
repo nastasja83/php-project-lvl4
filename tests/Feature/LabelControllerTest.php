@@ -2,15 +2,12 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use App\Models\User;
 use App\Models\Label;
 
 class LabelControllerTest extends TestCase
 {
-    use RefreshDatabase;
-
     private User $user;
 
     protected function setUp(): void
@@ -19,20 +16,35 @@ class LabelControllerTest extends TestCase
         $this->user = User::factory()->create();
     }
 
-    public function testIndex()
+    /**
+     * Test of labels index.
+     *
+     * @return void
+     */
+    public function testIndex(): void
     {
         $response = $this->get(route('labels.index'));
         $response->assertOk();
     }
 
-    public function testCreate()
+    /**
+     * Test of labels create.
+     *
+     * @return void
+     */
+    public function testCreate():void
     {
         $response = $this->actingAs($this->user)
             ->get(route('labels.create'));
         $response->assertOk();
     }
 
-    public function testEdit()
+    /**
+     * Test of labels edit.
+     *
+     * @return void
+     */
+    public function testEdit():void
     {
         $label = Label::factory()->create();
 
@@ -41,37 +53,52 @@ class LabelControllerTest extends TestCase
         $response->assertOk();
     }
 
-    public function testStore()
+    /**
+     * Test of labels store.
+     *
+     * @return void
+     */
+    public function testStore():void
     {
-        $data = Label::factory()
+        $labelInputData = Label::factory()
         ->make()
         ->only(['name', 'description']);
 
         $response = $this->actingAs($this->user)
-            ->post(route('labels.store', $data));
+            ->post(route('labels.store', $labelInputData));
         $response->assertSessionHasNoErrors();
         $response->assertRedirect(route('labels.index'));
-        $this->get(route('labels.index'))->assertSee($data['name']);
-        $this->assertDatabaseHas('labels', $data);
+        $this->get(route('labels.index'))->assertSee($labelInputData['name']);
+        $this->assertDatabaseHas('labels', $labelInputData);
     }
 
-    public function testUpdate()
+    /**
+     * Test of labels update.
+     *
+     * @return void
+     */
+    public function testUpdate():void
     {
         $label = Label::factory()->create();
 
-        $data = Label::factory()
+        $labelInputData = Label::factory()
         ->make()
         ->only(['name']);
 
         $response = $this->actingAs($this->user)
-            ->patch(route('labels.update', ['label' => $label]), $data);
+            ->patch(route('labels.update', ['label' => $label]), $labelInputData);
         $response->assertSessionHasNoErrors();
         $response->assertRedirect(route('labels.index'));
-        $this->get(route('labels.index'))->assertSee($data['name']);
-        $this->assertDatabaseHas('labels', $data);
+        $this->get(route('labels.index'))->assertSee($labelInputData['name']);
+        $this->assertDatabaseHas('labels', $labelInputData);
     }
 
-    public function testDestroy()
+    /**
+     * Test of labels delete.
+     *
+     * @return void
+     */
+    public function testDestroy():void
     {
         $label = Label::factory()->create();
         $response = $this->actingAs($this->user)

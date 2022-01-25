@@ -5,12 +5,9 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use App\Models\TaskStatus;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class TaskStatusControllerTest extends TestCase
 {
-    use RefreshDatabase;
-
     private User $user;
 
     protected function setUp(): void
@@ -19,12 +16,22 @@ class TaskStatusControllerTest extends TestCase
         $this->user = User::factory()->create();
     }
 
-    public function testIndex()
+    /**
+     * Test of task statuses index.
+     *
+     * @return void
+     */
+    public function testIndex(): void
     {
         $response = $this->get(route('task_statuses.index'));
         $response->assertOk();
     }
 
+    /**
+     * Test of task statuses create.
+     *
+     * @return void
+     */
     public function testCreate()
     {
         $response = $this->actingAs($this->user)
@@ -32,7 +39,12 @@ class TaskStatusControllerTest extends TestCase
         $response->assertOk();
     }
 
-    public function testEdit()
+    /**
+     * Test of task statuses edit.
+     *
+     * @return void
+     */
+    public function testEdit(): void
     {
         $status = TaskStatus::factory()->create();
 
@@ -41,37 +53,52 @@ class TaskStatusControllerTest extends TestCase
         $response->assertOk();
     }
 
-    public function testStore()
+    /**
+     * Test of task statuses store.
+     *
+     * @return void
+     */
+    public function testStore(): void
     {
-        $data = TaskStatus::factory()
+        $taskStatusInputData = TaskStatus::factory()
         ->make()
         ->only(['name']);
 
         $response = $this->actingAs($this->user)
-            ->post(route('task_statuses.store'), $data);
+            ->post(route('task_statuses.store'), $taskStatusInputData);
         $response->assertSessionHasNoErrors();
         $response->assertRedirect(route('task_statuses.index'));
-        $this->get(route('task_statuses.index'))->assertSee($data['name']);
-        $this->assertDatabaseHas('task_statuses', $data);
+        $this->get(route('task_statuses.index'))->assertSee($taskStatusInputData['name']);
+        $this->assertDatabaseHas('task_statuses', $taskStatusInputData);
     }
 
-    public function testUpdate()
+    /**
+     * Test of task statuses update.
+     *
+     * @return void
+     */
+    public function testUpdate(): void
     {
         $status = TaskStatus::factory()->create();
 
-        $data = TaskStatus::factory()
+        $taskStatusInputData = TaskStatus::factory()
         ->make()
         ->only(['name']);
 
         $response = $this->actingAs($this->user)
-            ->patch(route('task_statuses.update', ['task_status' => $status]), $data);
+            ->patch(route('task_statuses.update', ['task_status' => $status]), $taskStatusInputData);
         $response->assertSessionHasNoErrors();
         $response->assertRedirect(route('task_statuses.index'));
-        $this->get(route('task_statuses.index'))->assertSee($data['name']);
-        $this->assertDatabaseHas('task_statuses', $data);
+        $this->get(route('task_statuses.index'))->assertSee($taskStatusInputData['name']);
+        $this->assertDatabaseHas('task_statuses', $taskStatusInputData);
     }
 
-    public function testDestroy()
+    /**
+     * Test of task statuses delete.
+     *
+     * @return void
+     */
+    public function testDestroy(): void
     {
         $status = TaskStatus::factory()->create();
         $response = $this->actingAs($this->user)
