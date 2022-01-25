@@ -32,7 +32,7 @@ class LabelControllerTest extends TestCase
      *
      * @return void
      */
-    public function testCreate():void
+    public function testCreate(): void
     {
         $response = $this->actingAs($this->user)
             ->get(route('labels.create'));
@@ -44,7 +44,7 @@ class LabelControllerTest extends TestCase
      *
      * @return void
      */
-    public function testEdit():void
+    public function testEdit(): void
     {
         $label = Label::factory()->create();
 
@@ -58,7 +58,7 @@ class LabelControllerTest extends TestCase
      *
      * @return void
      */
-    public function testStore():void
+    public function testStore(): void
     {
         $labelInputData = Label::factory()
         ->make()
@@ -77,7 +77,7 @@ class LabelControllerTest extends TestCase
      *
      * @return void
      */
-    public function testUpdate():void
+    public function testUpdate(): void
     {
         $label = Label::factory()->create();
 
@@ -98,7 +98,7 @@ class LabelControllerTest extends TestCase
      *
      * @return void
      */
-    public function testDestroy():void
+    public function testDestroy(): void
     {
         $label = Label::factory()->create();
         $response = $this->actingAs($this->user)

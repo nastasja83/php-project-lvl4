@@ -11,7 +11,7 @@ class WelcomePageTest extends TestCase
      *
      * @return void
      */
-    public function testWelcome():void
+    public function testWelcome(): void
     {
         $response = $this->get(route('welcome'));
 
