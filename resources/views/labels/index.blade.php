@@ -23,7 +23,7 @@
                     <tr>
                         <td>{{ $label->id }}</td>
                         <td scope="row"> {{ $label->name }} </td>
-                        <td> {{ $label->description }} </td>
+                        <td class="text-break"> {{ $label->description }} </td>
                         <td>{{ $label->created_at->format('d.m.Y') }}</td>
                         @if(Auth::check())
                         <td>
