@@ -64,13 +64,14 @@ class TaskController extends Controller
     public function store(Request $request)
     {
         $taskInputData = $request->validate([
-            'name' => 'required|unique:tasks',
+            'name' => 'required|max:255|unique:tasks',
             'status_id' => 'required',
             'description' => 'nullable|string',
             'assigned_to_id' => 'nullable|integer',
             'labels' => 'nullable|array'
         ], $messages = [
             'unique' => __('validation.The task name has already been taken'),
+            'max' => __('validation.The name should be no more than :max characters'),
         ]);
 
         $user = Auth::user();
@@ -120,13 +121,14 @@ class TaskController extends Controller
     public function update(Request $request, Task $task)
     {
         $taskInputData = $this->validate($request, [
-            'name' => 'required|unique:tasks,name,' . $task->id,
+            'name' => 'required|max:255|unique:tasks,name,' . $task->id,
             'description' => 'nullable|string',
             'status_id' => 'required',
             'assigned_to_id' => 'nullable|integer',
             'labels' => 'nullable|array'
         ], $messages = [
             'unique' => __('validation.The task name has already been taken'),
+            'max' => __('validation.The name should be no more than :max characters'),
         ]);
 
         $task->fill($taskInputData);

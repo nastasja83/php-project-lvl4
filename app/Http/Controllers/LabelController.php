@@ -42,10 +42,11 @@ class LabelController extends Controller
     public function store(Request $request)
     {
         $labelInputData = $this->validate($request, [
-            'name' => 'required|unique:labels',
+            'name' => 'required|max:255|unique:labels',
             'description' => 'nullable|string'
         ], $messages = [
             'unique' => __('validation.The label name has already been taken'),
+            'max' => __('validation.The name should be no more than :max characters'),
         ]);
 
         $label = new Label();
@@ -78,10 +79,11 @@ class LabelController extends Controller
     public function update(Request $request, Label $label)
     {
         $labelInputData = $this->validate($request, [
-            'name' => 'required|unique:labels,name,' . $label->id,
+            'name' => 'required|max:255|unique:labels,name,' . $label->id,
             'description' => 'nullable|string'
         ], $messages = [
             'unique' => __('validation.The label name has already been taken'),
+            'max' => __('validation.The name should be no more than :max characters'),
         ]);
 
         $label->fill($labelInputData);

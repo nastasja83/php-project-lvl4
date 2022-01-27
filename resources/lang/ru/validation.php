@@ -153,5 +153,6 @@ return [
     'The password and confirmation do not match.' => 'Пароль и подтверждение не совпадают',
     'The task name has already been taken' => 'Задача с таким именем уже существует',
     'The label name has already been taken' => 'Метка с таким именем уже существует',
-    'The status name has already been taken' => 'Статус с таким именем уже существует'
+    'The status name has already been taken' => 'Статус с таким именем уже существует',
+    'The name should be no more than :max characters' => 'Имя должно содержать не более :max символов',
 ];

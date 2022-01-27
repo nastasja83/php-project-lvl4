@@ -43,9 +43,10 @@ class TaskStatusController extends Controller
     public function store(Request $request)
     {
         $taskStatusInputData = $this->validate($request, [
-            'name' => 'required|unique:task_statuses'
+            'name' => 'required|max:255|unique:task_statuses'
         ], $messages = [
             'unique' => __('validation.The status name has already been taken'),
+            'max' => __('validation.The name should be no more than :max characters'),
         ]);
         $taskStatus = new TaskStatus();
         $taskStatus->fill($taskStatusInputData);
@@ -76,9 +77,10 @@ class TaskStatusController extends Controller
     public function update(Request $request, TaskStatus $taskStatus)
     {
         $taskStatusInputData = $this->validate($request, [
-            'name' => 'required|unique:task_statuses,name,' . $taskStatus->id
+            'name' => 'required|max:255|unique:task_statuses,name,' . $taskStatus->id
         ], $messages = [
             'unique' => __('validation.The status name has already been taken'),
+            'max' => __('validation.The name should be no more than :max characters'),
         ]);
         $taskStatus->fill($taskStatusInputData);
         $taskStatus->save();
