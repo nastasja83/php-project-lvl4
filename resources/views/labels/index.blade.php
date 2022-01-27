@@ -11,7 +11,7 @@
                 <tr>
                     <th scope="col">ID</th>
                     <th scope="col">{{ __('labels.Label name') }}</th>
-                    <th scope="col">{{ __('labels.Description') }}</th>
+                    <th scope="col" class="text-break">{{ __('labels.Description') }}</th>
                     <th scope="col">{{ __('labels.Date of creation') }}</th>
                     @if(Auth::check())
                     <th scope="col">{{ __('labels.Actions') }}</th>
