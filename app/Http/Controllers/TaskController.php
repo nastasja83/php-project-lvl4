@@ -135,7 +135,7 @@ class TaskController extends Controller
         $task->save();
 
         $labels = collect($request->input('labels'))->filter(fn($label) => isset($label));
-        $task->labels()->attach($labels);
+        $task->labels()->sync($labels);
 
         flash(__('tasks.Task has been updated successfully'))->success();
         return redirect()->route('tasks.index');
